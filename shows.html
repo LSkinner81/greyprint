@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GREYPRINT — Shows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f0ede6;
+      --red: #c0392b;
+      --muted: #888;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Share Tech Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      background: rgba(10,10,10,0.88);
+      backdrop-filter: blur(4px);
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2rem; }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--red); }
+    .nav-links a.active { color: var(--white); }
+
+    /* SHOWS */
+    .section-inner {
+      padding: 8rem 2rem 5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid #2a2a2a;
+      padding-bottom: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .shows-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .shows-table th {
+      text-align: left;
+      font-size: 0.58rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #252525;
+    }
+
+    .shows-table td {
+      padding: 1.1rem 0;
+      border-bottom: 1px solid #181818;
+      font-size: 0.9rem;
+      vertical-align: middle;
+    }
+
+    .shows-table tr:last-child td { border-bottom: none; }
+    .shows-table tbody tr:hover td { background: rgba(192,57,43,0.06); }
+
+    .show-date {
+      color: var(--red);
+      font-size: 0.82rem;
+      white-space: nowrap;
+      padding-right: 1.5rem;
+      width: 120px;
+    }
+
+    .show-time {
+      color: var(--muted);
+      font-size: 0.82rem;
+      white-space: nowrap;
+      padding-right: 1.5rem;
+      width: 80px;
+    }
+
+    .show-venue { color: var(--white); }
+
+    .show-address {
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding-left: 1rem;
+    }
+
+    .show-with {
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding-left: 1rem;
+      font-style: italic;
+    }
+
+    #shows-status {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      padding: 1.5rem 0;
+    }
+
+    #shows-status.error { color: var(--red); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #1a1a1a;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.6rem;
+      color: #3a3a3a;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+      .show-address,
+      .show-with,
+      .shows-table th:nth-child(4),
+      .shows-table th:nth-child(5) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">Greyprint</a>
+    <div class="nav-links">
+      <a href="shows.html" class="active">Shows</a>
+      <a href="mailto:hello@greyprint.com">Contact</a>
+    </div>
+  </nav>
+
+  <div class="section-inner">
+    <p class="section-label">On tour</p>
+    <h2 class="section-title">Shows</h2>
+
+    <div id="shows-status">Loading shows...</div>
+
+    <table class="shows-table" id="shows-table" style="display:none">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Venue</th>
+          <th>Address</th>
+          <th>With</th>
+        </tr>
+      </thead>
+      <tbody id="shows-body"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    &copy; <span id="yr"></span> Greyprint &nbsp;·&nbsp; All rights reserved
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9O6sfSKjhofLWcwnK2Tx-Teko7Pz9GKfXvH7cmHYJ-RbuxvSEtFKf_7tzxPf3b2it3w20jqhnW4UY/pub?gid=0&single=true&output=csv';
+
+    async function loadShows() {
+      const status = document.getElementById('shows-status');
+      const table  = document.getElementById('shows-table');
+      const tbody  = document.getElementById('shows-body');
+
+      try {
+        const res = await fetch(SHEET_CSV_URL);
+        if (!res.ok) throw new Error('fetch failed');
+        const text = await res.text();
+        const rows = text.trim().split('\n').slice(1);
+
+        if (!rows.length || rows[0].trim() === '') {
+          status.textContent = '— No shows listed yet —';
+          return;
+        }
+
+        tbody.innerHTML = '';
+
+        rows.forEach(row => {
+          const cols = [];
+          let current = '';
+          let inQuotes = false;
+          for (const ch of row) {
+            if (ch === '"') { inQuotes = !inQuotes; }
+            else if (ch === ',' && !inQuotes) { cols.push(current.trim()); current = ''; }
+            else { current += ch; }
+          }
+          cols.push(current.trim());
+
+          const [date, time, venue, address, with_] = cols;
+          if (!date && !venue) return;
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td class="show-date">${date || ''}</td>
+            <td class="show-time">${time || ''}</td>
+            <td class="show-venue">${venue || ''}</td>
+            <td class="show-address">${address || ''}</td>
+            <td class="show-with">${with_ ? 'w/ ' + with_ : ''}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        status.style.display = 'none';
+        table.style.display = 'table';
+
+      } catch (err) {
+        status.className = 'error';
+        status.textContent = 'Could not load shows. Check back soon.';
+        console.error(err);
+      }
+    }
+
+    loadShows();
+  </script>
+
+</body>
+</html>
