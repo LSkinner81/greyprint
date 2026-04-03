@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- saved from url=(0060)file:///C:/Users/lskin/OneDrive/Desktop/Greyprint/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GREYPRINT</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link href="./index_files/css2" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -235,9 +235,9 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="#">Greyprint</a>
+    <a class="nav-logo" href="file:///C:/Users/lskin/OneDrive/Desktop/Greyprint/index.html#">Greyprint</a>
     <div class="nav-links">
-      <a href="#shows">Shows</a>
+      <a href="file:///C:/Users/lskin/OneDrive/Desktop/Greyprint/index.html#shows">Shows</a>
       <a href="mailto:hello@greyprint.com">Contact</a>
     </div>
   </nav>
@@ -249,7 +249,7 @@
        e.g.  src="band.jpg"
   ════════════════════════════════════ -->
   <section id="hero">
-    <img id="hero-img" src="hero.jpg" alt="Greyprint" />
+    <img id="hero-img" src="file:///C:/Users/lskin/OneDrive/Desktop/Greyprint/hero.jpg" alt="Greyprint">
     <div class="hero-overlay"></div>
     <div class="hero-text">
       <h1>Grey<span>print</span></h1>
@@ -263,7 +263,7 @@
       <p class="section-label">On tour</p>
       <h2 class="section-title">Shows</h2>
 
-      <div id="shows-status">Loading shows...</div>
+      <div id="shows-status">— No shows listed yet —</div>
 
       <table class="shows-table" id="shows-table" style="display:none">
         <thead>
@@ -280,7 +280,7 @@
   </section>
 
   <footer>
-    &copy; <span id="yr"></span> Greyprint &nbsp;·&nbsp; All rights reserved
+    © <span id="yr">2026</span> Greyprint &nbsp;·&nbsp; All rights reserved
   </footer>
 
   <script>
@@ -307,7 +307,7 @@
     // The site fetches fresh data every time someone loads the page.
     // ════════════════════════════════════════════════════════
 
-    const SHEET_CSV_URL = 'YOUR_GOOGLE_SHEET_CSV_URL_HERE';
+    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9O6sfSKjhofLWcwnK2Tx-Teko7Pz9GKfXvH7cmHYJ-RbuxvSEtFKf_7tzxPf3b2it3w20jqhnW4UY/pub?gid=0&single=true&output=csv';
 
     async function loadShows() {
       const status = document.getElementById('shows-status');
@@ -370,5 +370,6 @@
     loadShows();
   </script>
 
-</body>
-</html>
+
+
+</body></html>
