@@ -267,10 +267,11 @@
       <table class="shows-table" id="shows-table" style="display:none">
         <thead>
           <tr>
-            <th>Date</th>
+             <th>Date</th>
+            <th>Time</th>
             <th>Venue</th>
-            <th>Location</th>
-            <th></th>
+            <th>Address</th>
+            <th>With</th>
           </tr>
         </thead>
         <tbody id="shows-body"></tbody>
@@ -343,15 +344,16 @@
           }
           cols.push(current.trim());
 
-          const [date, venue, location, tickets] = cols;
+         const [date, time, venue, address, with_] = cols;
           if (!date && !venue) return;
 
           const tr = document.createElement('tr');
           tr.innerHTML = `
             <td class="show-date">${date || ''}</td>
+            <td class="show-date">${time || ''}</td>
             <td class="show-venue">${venue || ''}</td>
-            <td class="show-location">${location || ''}</td>
-            <td class="show-link">${tickets ? `<a href="${tickets}" target="_blank" rel="noopener">Tickets &rarr;</a>` : ''}</td>
+            <td class="show-location">${address || ''}</td>
+            <td class="show-location">${with_ || ''}</td>
           `;
           tbody.appendChild(tr);
         });
