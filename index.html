@@ -16,7 +16,7 @@
       --muted: #888;
     }
 
-    html { scroll-behavior: smooth; }
+    html, body { height: 100%; }
 
     body {
       background: var(--black);
@@ -61,16 +61,16 @@
     .nav-links a:hover { color: var(--red); }
 
     /* HERO */
-   #hero {
+    #hero {
       position: relative;
-      height: 60vh;
+      height: 75vh;
       min-height: 400px;
       display: flex;
       align-items: flex-end;
       overflow: hidden;
     }
 
-  #hero-img {
+    #hero-img {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -106,97 +106,6 @@
       color: var(--muted);
     }
 
-    /* SHOWS */
-    #shows { border-top: 1px solid #1a1a1a; }
-
-    .section-inner {
-      padding: 5rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.5em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 0.6rem;
-    }
-
-    .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      letter-spacing: 0.05em;
-      border-bottom: 1px solid #2a2a2a;
-      padding-bottom: 0.75rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .shows-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .shows-table th {
-      text-align: left;
-      font-size: 0.58rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid #252525;
-    }
-
-    .shows-table td {
-      padding: 1.1rem 0;
-      border-bottom: 1px solid #181818;
-      font-size: 0.9rem;
-      vertical-align: middle;
-    }
-
-    .shows-table tr:last-child td { border-bottom: none; }
-    .shows-table tbody tr:hover td { background: rgba(192,57,43,0.06); }
-
-    .show-date {
-      color: var(--red);
-      font-size: 0.82rem;
-      white-space: nowrap;
-      padding-right: 1.5rem;
-      width: 120px;
-    }
-
-    .show-time {
-      color: var(--muted);
-      font-size: 0.82rem;
-      white-space: nowrap;
-      padding-right: 1.5rem;
-      width: 80px;
-    }
-
-    .show-venue { color: var(--white); }
-
-    .show-address {
-      color: var(--muted);
-      font-size: 0.78rem;
-      padding-left: 1rem;
-    }
-
-    .show-with {
-      color: var(--muted);
-      font-size: 0.78rem;
-      padding-left: 1rem;
-      font-style: italic;
-    }
-
-    #shows-status {
-      font-size: 0.78rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      padding: 1.5rem 0;
-    }
-
-    #shows-status.error { color: var(--red); }
-
     /* FOOTER */
     footer {
       border-top: 1px solid #1a1a1a;
@@ -207,21 +116,14 @@
       letter-spacing: 0.25em;
       text-transform: uppercase;
     }
-
-    @media (max-width: 600px) {
-      .show-address,
-      .show-with,
-      .shows-table th:nth-child(4),
-      .shows-table th:nth-child(5) { display: none; }
-    }
   </style>
 </head>
 <body>
 
   <nav>
-    <a class="nav-logo" href="#">Greyprint</a>
+    <a class="nav-logo" href="index.html">Greyprint</a>
     <div class="nav-links">
-      <a href="#shows">Shows</a>
+      <a href="shows.html">Shows</a>
       <a href="mailto:hello@greyprint.com">Contact</a>
     </div>
   </nav>
@@ -230,29 +132,7 @@
     <img id="hero-img" src="hero.jpg" alt="Greyprint" />
     <div class="hero-overlay"></div>
     <div class="hero-text">
-      <p class="hero-tagline">Loud &nbsp;·&nbsp; Fast &nbsp;·&nbsp; Old</p>
-    </div>
-  </section>
-
-  <section id="shows">
-    <div class="section-inner">
-      <p class="section-label">On tour</p>
-      <h2 class="section-title">Shows</h2>
-
-      <div id="shows-status">Loading shows...</div>
-
-      <table class="shows-table" id="shows-table" style="display:none">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Venue</th>
-            <th>Address</th>
-            <th>With</th>
-          </tr>
-        </thead>
-        <tbody id="shows-body"></tbody>
-      </table>
+      <p class="hero-tagline">Loud &nbsp;·&nbsp; Raw &nbsp;·&nbsp; Live</p>
     </div>
   </section>
 
@@ -262,84 +142,6 @@
 
   <script>
     document.getElementById('yr').textContent = new Date().getFullYear();
-
-    // ════════════════════════════════════════════════════════
-    // HOW TO CONNECT YOUR GOOGLE SHEET
-    //
-    // 1. Create a Google Sheet with these columns in row 1:
-    //      Date | Time | Venue | Address | With
-    //
-    //    Example row:
-    //      May 10 2025 | 8:00 PM | The Fillmore | 1805 Geary Blvd SF CA | The Misfits
-    //
-    // 2. File → Share → Publish to web
-    //    → Select "Sheet1" and "Comma-separated values (.csv)"
-    //    → Click Publish → Copy the URL
-    //
-    // 3. Paste that URL below, replacing the placeholder.
-    // ════════════════════════════════════════════════════════
-
-    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9O6sfSKjhofLWcwnK2Tx-Teko7Pz9GKfXvH7cmHYJ-RbuxvSEtFKf_7tzxPf3b2it3w20jqhnW4UY/pub?gid=0&single=true&output=csv';
-
-    async function loadShows() {
-      const status = document.getElementById('shows-status');
-      const table  = document.getElementById('shows-table');
-      const tbody  = document.getElementById('shows-body');
-
-      if (SHEET_CSV_URL === 'YOUR_GOOGLE_SHEET_CSV_URL_HERE') {
-        status.textContent = '— No shows listed yet —';
-        return;
-      }
-
-      try {
-        const res = await fetch(SHEET_CSV_URL);
-        if (!res.ok) throw new Error('fetch failed');
-        const text = await res.text();
-        const rows = text.trim().split('\n').slice(1);
-
-        if (!rows.length || rows[0].trim() === '') {
-          status.textContent = '— No shows listed yet —';
-          return;
-        }
-
-        tbody.innerHTML = '';
-
-        rows.forEach(row => {
-          const cols = [];
-          let current = '';
-          let inQuotes = false;
-          for (const ch of row) {
-            if (ch === '"') { inQuotes = !inQuotes; }
-            else if (ch === ',' && !inQuotes) { cols.push(current.trim()); current = ''; }
-            else { current += ch; }
-          }
-          cols.push(current.trim());
-
-          const [date, time, venue, address, with_] = cols;
-          if (!date && !venue) return;
-
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td class="show-date">${date || ''}</td>
-            <td class="show-time">${time || ''}</td>
-            <td class="show-venue">${venue || ''}</td>
-            <td class="show-address">${address || ''}</td>
-            <td class="show-with">${with_ ? 'w/ ' + with_ : ''}</td>
-          `;
-          tbody.appendChild(tr);
-        });
-
-        status.style.display = 'none';
-        table.style.display = 'table';
-
-      } catch (err) {
-        status.className = 'error';
-        status.textContent = 'Could not load shows. Check back soon.';
-        console.error(err);
-      }
-    }
-
-    loadShows();
   </script>
 
 </body>
