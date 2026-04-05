@@ -52,7 +52,18 @@
       color: var(--white);
       text-decoration: none;
     }
+.nav-social { display: flex; gap: 1rem; align-items: center; }
 
+    .nav-social a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+
+    .nav-social a:hover { color: var(--red); }
     .nav-links { display: flex; gap: 2rem; }
 
    .nav-links a {
@@ -125,7 +136,12 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="index.html">Greyprint</a>
+   <a class="nav-logo" href="index.html">Greyprint</a>
+    <div class="nav-social">
+      <a href="https://twitter.com/YOURHANDLE" target="_blank">X</a>
+      <a href="https://instagram.com/YOURHANDLE" target="_blank">IG</a>
+      <a href="https://tiktok.com/@YOURHANDLE" target="_blank">TT</a>
+    </div>
     <div class="nav-links">
       <a href="shows.html">Shows</a>
       <a href="mailto:louis@greyprint.com">Contact</a>
