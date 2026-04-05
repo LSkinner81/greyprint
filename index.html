@@ -8,13 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-@font-face {
+
+    @font-face {
       font-family: 'LWS_font';
-      src: url('LWS_font.otf') format('opentype'),
-           url('LWS_font.otf') format('truetype');
+      src: url('LWS_font.otf') format('opentype');
       font-weight: normal;
       font-style: normal;
     }
+
     :root {
       --black: #0a0a0a;
       --white: #f0ede6;
@@ -22,7 +23,7 @@
       --muted: #888;
     }
 
-    html, body { height: 100%; }
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--black);
@@ -37,10 +38,9 @@
       top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
-      justify-content: space-between
-      gap: 1.5
-    rem;
+      justify-content: flex-start;
       align-items: center;
+      gap: 1.5rem;
       padding: 1.2rem 2rem;
       background: rgba(10,10,10,0.88);
       backdrop-filter: blur(4px);
@@ -54,7 +54,12 @@
       color: var(--white);
       text-decoration: none;
     }
-.nav-social { display: flex; gap: 1rem; align-items: center; }
+
+    .nav-social {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
 
     .nav-social a {
       color: var(--muted);
@@ -66,9 +71,14 @@
     }
 
     .nav-social a:hover { color: var(--red); }
-    .nav-links { display: flex; gap: 2rem; }
 
-   .nav-links a {
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      margin-left: auto;
+    }
+
+    .nav-links a {
       color: var(--muted);
       text-decoration: none;
       font-size: 1rem;
@@ -77,6 +87,7 @@
       text-transform: uppercase;
       transition: color 0.2s;
     }
+
     .nav-links a:hover { color: var(--red); }
 
     /* HERO */
@@ -96,31 +107,28 @@
       height: 100%;
       object-fit: contain;
       object-position: center center;
-     filter: grayscale(30%) contrast(1.0) brightness(1.0);
+      filter: grayscale(30%) contrast(1.0) brightness(1.1);
       padding-top: 70px;
     }
 
-   .hero-overlay {
+    .hero-overlay {
       position: absolute;
       inset: 0;
       background: rgba(0,0,0,0);
     }
 
-   .hero-text {
-      position: relative;
-      z-index: 10;
-      padding: 2rem;
-      width: 100%;
-     
+    /* TAGLINE */
+    .hero-tagline-wrap {
+      text-align: center;
+      padding: 1.5rem 0;
     }
 
     .hero-tagline {
-      font-family: 'LWS', monospace;
-      font-size: 4rem;
+      font-family: 'LWS_font', monospace;
+      font-size: 3rem;
       letter-spacing: 0.4em;
       text-transform: uppercase;
       color: var(--white);
-      text-align: center;
     }
 
     /* FOOTER */
@@ -138,24 +146,25 @@
 <body>
 
   <nav>
-   <a class="nav-logo" href="index.html">Greyprint</a>
+    <a class="nav-logo" href="index.html">Greyprint</a>
     <div class="nav-social">
-      <a href="https://twitter.com/YOURHANDLE" target="_blank">X</a>
-      <a href="https://instagram.com/YOURHANDLE" target="_blank">IG</a>
-      <a href="https://tiktok.com/@YOURHANDLE" target="_blank">TT</a>
+      <a href="https://twitter.com/Greyprint_Music" target="_blank">X</a>
+      <a href="https://instagram.com/greyprint_music" target="_blank">IG</a>
+      <a href="https://tiktok.com/@greyprint_music" target="_blank">TT</a>
     </div>
-    <div class="nav-links" style="margin-left: auto;">
+    <div class="nav-links">
       <a href="shows.html">Shows</a>
-      <a href="mailto:louis@greyprint.com">Contact</a>
+      <a href="mailto:louis@greyprint.net">Contact</a>
     </div>
   </nav>
 
- <section id="hero">
+  <section id="hero">
     <img id="hero-img" src="hero.jpg" alt="Greyprint" />
     <div class="hero-overlay"></div>
   </section>
- <div style="text-align:center; padding: 1.5rem 0; color: #f0ede6; font-family: 'LWS_font', monospace; font-size: 2rem; letter-spacing: 0.4em;">
-    Loud · Fast · Old
+
+  <div class="hero-tagline-wrap">
+    <p class="hero-tagline">Loud · Fast · Old</p>
   </div>
 
   <footer>
