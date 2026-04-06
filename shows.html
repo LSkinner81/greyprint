@@ -85,7 +85,7 @@
       color: var(--muted);
       text-decoration: none;
       font-family: 'LWS_font', monospace;
-      font-size: 1.25rem;
+      font-size: 1rem;
       font-weight: bold;
       letter-spacing: 0.25em;
       text-transform: uppercase;
@@ -151,9 +151,7 @@
       border-top: 1px solid #1e1e1e;
     }
 
-    .mobile-menu .mobile-social a {
-      font-size: 0;
-    }
+    .mobile-menu .mobile-social a { font-size: 0; }
 
     .mobile-menu .mobile-social svg {
       width: 22px;
@@ -210,13 +208,14 @@
       font-size: 1rem;
       white-space: nowrap;
       padding-right: 1rem;
-      width: 180px;
+      width: 170px;
     }
 
-  .show-time {
+    .show-time {
       color: var(--muted);
       font-size: 1rem;
       white-space: nowrap;
+      padding-left: 2rem;
       padding-right: 2.5rem;
       width: 70px;
     }
@@ -227,6 +226,11 @@
       color: var(--muted);
       font-size: 0.9rem;
       padding-left: 1rem;
+    }
+
+    .show-address span {
+      display: block;
+      line-height: 1.6;
     }
 
     .show-with {
@@ -257,7 +261,7 @@
     }
 
     /* MOBILE */
-   @media (max-width: 640px) {
+    @media (max-width: 640px) {
       .nav-social,
       .nav-links { display: none; }
       .hamburger { display: flex; }
@@ -280,7 +284,7 @@
       }
 
       .show-date { color: var(--red); font-size: 0.85rem; }
-      .show-time { color: var(--muted); font-size: 0.8rem; }
+      .show-time { color: var(--muted); font-size: 0.8rem; padding-left: 0; }
       .show-venue { font-size: 1rem; color: var(--white); }
       .show-address { color: var(--muted); font-size: 0.78rem; padding-left: 0; }
       .show-with { color: var(--muted); font-size: 0.78rem; padding-left: 0; font-style: italic; }
@@ -390,7 +394,7 @@
           }
           cols.push(current.trim());
 
-          const [date, time, venue, address, with_] = cols;
+          const [date, time, venue, street, city, with_] = cols;
           if (!date && !venue) return;
 
           const tr = document.createElement('tr');
@@ -398,7 +402,10 @@
             <td class="show-date">${date || ''}</td>
             <td class="show-time">${time || ''}</td>
             <td class="show-venue">${venue || ''}</td>
-            <td class="show-address">${address || ''}</td>
+            <td class="show-address">
+              ${street ? `<span>${street}</span>` : ''}
+              ${city ? `<span>${city}</span>` : ''}
+            </td>
             <td class="show-with">${with_ ? 'w/ ' + with_ : ''}</td>
           `;
           tbody.appendChild(tr);
