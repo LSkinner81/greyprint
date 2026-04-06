@@ -165,7 +165,7 @@
     /* SHOWS */
     .section-inner {
       padding: 8rem 1.5rem 5rem;
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
     }
 
@@ -181,7 +181,15 @@
     .shows-table {
       width: 100%;
       border-collapse: collapse;
+      table-layout: fixed;
     }
+
+    /* Column widths */
+    .shows-table col.col-date   { width: 140px; }
+    .shows-table col.col-time   { width: 90px; }
+    .shows-table col.col-venue  { width: 160px; }
+    .shows-table col.col-addr   { width: 220px; }
+    .shows-table col.col-with   { width: auto; }
 
     .shows-table th {
       text-align: left;
@@ -191,13 +199,15 @@
       color: var(--muted);
       padding-bottom: 0.75rem;
       border-bottom: 1px solid #252525;
+      overflow: hidden;
     }
 
     .shows-table td {
-      padding: 1.1rem 0;
+      padding: 1.1rem 0.5rem 1.1rem 0;
       border-bottom: 1px solid #181818;
-      font-size: 1.2rem;
+      font-size: 1rem;
       vertical-align: middle;
+      overflow: hidden;
     }
 
     .shows-table tr:last-child td { border-bottom: none; }
@@ -205,38 +215,35 @@
 
     .show-date {
       color: var(--red);
-      font-size: 1rem;
+      font-size: 0.95rem;
       white-space: nowrap;
-      padding-right: 1rem;
-      width: 170px;
     }
 
     .show-time {
       color: var(--muted);
-      font-size: 1rem;
+      font-size: 0.95rem;
       white-space: nowrap;
-      padding-left: 2rem;
-      padding-right: 2.5rem;
-      width: 70px;
+      padding-left: 0.5rem;
     }
 
-    .show-venue { color: var(--white); }
+    .show-venue {
+      color: var(--white);
+      font-size: 1rem;
+    }
 
     .show-address {
       color: var(--muted);
-      font-size: 0.9rem;
-      padding-left: 1rem;
+      font-size: 0.85rem;
     }
 
     .show-address span {
       display: block;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     .show-with {
       color: var(--muted);
-      font-size: 0.9rem;
-      padding-left: 1rem;
+      font-size: 0.85rem;
       font-style: italic;
     }
 
@@ -266,6 +273,7 @@
       .nav-links { display: none; }
       .hamburger { display: flex; }
 
+      .shows-table { table-layout: auto; }
       .shows-table thead { display: none; }
 
       .shows-table tr {
@@ -281,13 +289,14 @@
         border-bottom: none;
         padding: 0.15rem 0;
         font-size: 0.95rem;
+        overflow: visible;
       }
 
-      .show-date { color: var(--red); font-size: 0.85rem; }
-      .show-time { color: var(--muted); font-size: 0.8rem; padding-left: 0; }
-      .show-venue { font-size: 1rem; color: var(--white); }
-      .show-address { color: var(--muted); font-size: 0.78rem; padding-left: 0; }
-      .show-with { color: var(--muted); font-size: 0.78rem; padding-left: 0; font-style: italic; }
+      .show-date  { color: var(--red); font-size: 0.85rem; }
+      .show-time  { color: var(--muted); font-size: 0.8rem; padding-left: 0; }
+      .show-venue { font-size: 1rem; }
+      .show-address { font-size: 0.78rem; padding-left: 0; }
+      .show-with  { font-size: 0.78rem; padding-left: 0; }
     }
   </style>
 </head>
@@ -337,6 +346,13 @@
     <div id="shows-status">Loading shows...</div>
 
     <table class="shows-table" id="shows-table" style="display:none">
+      <colgroup>
+        <col class="col-date" />
+        <col class="col-time" />
+        <col class="col-venue" />
+        <col class="col-addr" />
+        <col class="col-with" />
+      </colgroup>
       <thead>
         <tr>
           <th>Date</th>
