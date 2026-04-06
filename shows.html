@@ -205,7 +205,7 @@
     .shows-table td {
       padding: 1.1rem 0.5rem 1.1rem 0;
       border-bottom: 1px solid #181818;
-      font-size: 1rem;
+      font-size: 1.2rem;
       vertical-align: middle;
       overflow: hidden;
     }
@@ -215,25 +215,25 @@
 
     .show-date {
       color: var(--red);
-      font-size: 0.95rem;
+      font-size: 1.2rem;
       white-space: nowrap;
     }
 
     .show-time {
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 1.2rem;
       white-space: nowrap;
       padding-left: 0.5rem;
     }
 
     .show-venue {
       color: var(--white);
-      font-size: 1rem;
+      font-size: 1.2rem;
     }
 
     .show-address {
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 1.25rem;
     }
 
     .show-address span {
@@ -243,7 +243,7 @@
 
     .show-with {
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 1.2rem;
       font-style: italic;
     }
 
@@ -422,7 +422,7 @@
               ${street ? `<span>${street}</span>` : ''}
               ${city ? `<span>${city}</span>` : ''}
             </td>
-            <td class="show-with">${with_ ? 'w/ ' + with_ : ''}</td>
+            <td class="show-with">${with_ || ''}</td>
           `;
           tbody.appendChild(tr);
         });
