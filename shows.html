@@ -170,7 +170,7 @@
     /* SHOWS */
     .section-inner {
       padding: 8rem 1.5rem 5rem;
-      max-width: 960px;
+      max-width: 1050px;
       margin: 0 auto;
     }
 
@@ -189,11 +189,12 @@
       table-layout: fixed;
     }
 
-    .shows-table col.col-date  { width: 140px; }
-    .shows-table col.col-time  { width: 90px; }
-    .shows-table col.col-venue { width: 160px; }
-    .shows-table col.col-addr  { width: 280px; }
-    .shows-table col.col-with  { width: auto; }
+    .shows-table col.col-date    { width: 140px; }
+    .shows-table col.col-time    { width: 90px; }
+    .shows-table col.col-venue   { width: 150px; }
+    .shows-table col.col-addr    { width: 230px; }
+    .shows-table col.col-with    { width: 150px; }
+    .shows-table col.col-tickets { width: auto; }
 
     .shows-table th {
       text-align: left;
@@ -217,33 +218,14 @@
     .shows-table tr:last-child td { border-bottom: none; }
     .shows-table tbody tr:hover td { background: rgba(192,57,43,0.06); }
 
-    .show-date {
-      color: var(--red);
-      font-size: 1.2rem;
-      white-space: nowrap;
-    }
-
-    .show-time {
-      color: var(--muted);
-      font-size: 1.2rem;
-      white-space: nowrap;
-      padding-left: 0.5rem;
-    }
-
-    .show-venue { color: var(--white); font-size: 1.2rem; }
+    .show-date    { color: var(--red); font-size: 1.2rem; white-space: nowrap; }
+    .show-time    { color: var(--muted); font-size: 1.2rem; white-space: nowrap; padding-left: 0.5rem; }
+    .show-venue   { color: var(--white); font-size: 1.2rem; }
+    .show-with    { color: var(--muted); font-size: 1.2rem; font-style: italic; }
+    .show-tickets { color: var(--muted); font-size: 1.2rem; }
 
     .show-address { color: var(--muted); font-size: 1.2rem; }
-
-    .show-address span {
-      display: block;
-      line-height: 1.7;
-    }
-
-    .show-with {
-      color: var(--muted);
-      font-size: 1.2rem;
-      font-style: italic;
-    }
+    .show-address span { display: block; line-height: 1.7; }
 
     #shows-status {
       font-size: 0.78rem;
@@ -290,11 +272,12 @@
         overflow: visible;
       }
 
-      .show-date  { color: var(--red); font-size: 0.85rem; }
-      .show-time  { color: var(--muted); font-size: 0.8rem; padding-left: 0; }
-      .show-venue { font-size: 1rem; }
+      .show-date    { color: var(--red); font-size: 0.85rem; }
+      .show-time    { color: var(--muted); font-size: 0.8rem; padding-left: 0; }
+      .show-venue   { font-size: 1rem; }
       .show-address { font-size: 0.78rem; padding-left: 0; }
-      .show-with  { font-size: 0.78rem; padding-left: 0; }
+      .show-with    { font-size: 0.78rem; padding-left: 0; }
+      .show-tickets { font-size: 0.78rem; }
     }
   </style>
 </head>
@@ -356,6 +339,7 @@
         <col class="col-venue" />
         <col class="col-addr" />
         <col class="col-with" />
+        <col class="col-tickets" />
       </colgroup>
       <thead>
         <tr>
@@ -364,6 +348,7 @@
           <th>Venue</th>
           <th>Address</th>
           <th>With</th>
+          <th>Tickets</th>
         </tr>
       </thead>
       <tbody id="shows-body"></tbody>
@@ -414,7 +399,7 @@
           }
           cols.push(current.trim());
 
-          const [date, time, venue, street, city, with_] = cols;
+          const [date, time, venue, street, city, with_, tickets] = cols;
           if (!date && !venue) return;
 
           const tr = document.createElement('tr');
@@ -427,6 +412,7 @@
               ${city ? `<span>${city}</span>` : ''}
             </td>
             <td class="show-with">${with_ || ''}</td>
+            <td class="show-tickets">${tickets || ''}</td>
           `;
           tbody.appendChild(tr);
         });
